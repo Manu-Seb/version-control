@@ -1,0 +1,33 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String dir = System.getProperty("user.dir");
+
+        // ArrayList<String> paths= BlobGen.getFiles(dir);
+
+        // for(String path: paths){
+        //     System.out.println(path);
+        // }
+
+        MainFunc mf = new MainFunc();
+        mf.addFiles(dir);
+
+        // String homeDir = System.getProperty("user.home");
+        // String cwd = System.getProperty("user.dir");
+        // ArrayList paths = BlobGen.getFiles(dir);
+        // Tree rep = new Tree(paths, cwd);
+        // Tree.Node root = rep.getRoot();
+        // String path = root.getName();
+        // rep.printTree(root, path);
+    }
+}
