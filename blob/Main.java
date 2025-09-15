@@ -23,7 +23,9 @@ public class Main {
 
         // mf.status();
 
-        mf.log();
+        // mf.log();
+
+        // mf.listBranches();
 
         // mf.createBranch("newBranch");
 

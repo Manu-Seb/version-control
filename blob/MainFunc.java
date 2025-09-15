@@ -163,5 +163,18 @@ public class MainFunc {
         Branch.setBranch(s);
     }
 
+    public void listBranches(){
+
+        System.out.println("Available branches are: ");
+        ArrayList<String> branches = Branch.getBranches();
+        String cwd = System.getProperty("user.dir");
+        String refs = cwd+"/.vcs/refs/";
+        for(String branch : branches){
+            if(branch.startsWith(cwd)){
+                System.out.println(branch.substring(refs.length()).split("\\.")[0]);
+            }
+        }
+    }
+
 
 }

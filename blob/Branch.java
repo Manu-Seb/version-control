@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Branch {
     public static String getBranch(){
@@ -33,5 +34,11 @@ public class Branch {
             System.out.println("Error creating branch: " + e.getMessage());
         }
 
+    }
+
+    public static ArrayList<String> getBranches(){
+
+        ArrayList<String> branches = Helper.getFiles(System.getProperty("user.dir") + "/.vcs/refs/");
+        return branches;
     }
 }
