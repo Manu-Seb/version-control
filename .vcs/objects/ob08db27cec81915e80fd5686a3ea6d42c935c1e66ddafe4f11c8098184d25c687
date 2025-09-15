@@ -1,4 +1,0 @@
-HEAD
-0000000000000000000000000000000000000000 853809667f18f8cddc79e1878a20faa49fa75a1a Manu-Seb <manusebastian018@gmail.com> 1757845797 +0530	commit (initial): finished creation of blobs and merkel trees
-853809667f18f8cddc79e1878a20faa49fa75a1a 0000000000000000000000000000000000000000 Manu-Seb <manusebastian018@gmail.com> 1757845896 +0530	Branch: renamed refs/heads/master to refs/heads/main
-0000000000000000000000000000000000000000 853809667f18f8cddc79e1878a20faa49fa75a1a Manu-Seb <manusebastian018@gmail.com> 1757845896 +0530	Branch: renamed refs/heads/master to refs/heads/main

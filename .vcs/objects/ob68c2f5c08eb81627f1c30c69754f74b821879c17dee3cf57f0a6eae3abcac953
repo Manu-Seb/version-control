@@ -1,3 +1,4 @@
+Main.java
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,12 +15,12 @@ public class Main {
         String dir = System.getProperty("user.dir");
 
         MainFunc mf = new MainFunc();
-        // mf.addFiles(dir);
+        mf.addFiles(dir);
 
-        // mf.commit("This is a test commit 7", "manu");
+        mf.commit("This is a test commit 7", "manu");
 
         // mf.status();
 
-        mf.log();
+        // mf.log();
     }
 }
