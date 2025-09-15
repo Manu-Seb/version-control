@@ -11,7 +11,8 @@ public class MerkleTreeBuilder {
         // Ensure .vcs/objects exists
         File objDir = new File(OBJECTS_DIR);
         if (!objDir.exists()) {
-            objDir.mkdirs();
+            System.out.println("Please initialize the vcs first");
+            return " ";
         }
 
         if (node.getChildren().isEmpty()) {

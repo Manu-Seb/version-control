@@ -18,7 +18,7 @@ public class Helper {
 
     // Already exists: getFiles(), readFile(), createHash()
 
-    public static String createCommit(String treeHash, String message, String author) {
+    public static String createCommit(String treeHash, String message, String author,String branchName) {
         // Get parent commit from refs.txt
         String parent = getHead();
 
@@ -43,7 +43,7 @@ public class Helper {
         writeObject("cm" + commitHash, commitContent.toString());
 
         // Update HEAD (refs.txt)
-        updateHead(commitHash);
+        updateHead(commitHash, branchName);
 
         return commitHash;
     }
@@ -64,9 +64,13 @@ public class Helper {
         }
     }
 
-    private static void updateHead(String commitHash) {
+    private static void updateHead(String commitHash,String branchHead) {
         try {
-            File file = new File(DIR+"refs.txt");
+            File file = new File(DIR+"refs/"+branchHead+".txt");
+            if(!file.exists()) {
+                System.out.println("Branch does not exist");
+                return;
+            }
             file.getParentFile().mkdirs();
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write(commitHash);
@@ -77,8 +81,9 @@ public class Helper {
     }
 
     private static String getHead() {
+        String branch = Branch.getBranch();
         try {
-            File file = new File(DIR+"refs.txt");
+            File file = new File(DIR+"refs/"+branch +".txt");
             if (!file.exists()) return null;
             return Files.readString(file.toPath()).trim();
         } catch (IOException e) {
@@ -111,7 +116,8 @@ public class Helper {
     
     public static String readFile(String fileName){
         File myFile = new File(fileName);
-        System.out.println("File exists: " + fileName);
+        if(myFile.exists()) System.out.println("File exists: " + fileName);
+        else System.out.println("File does not exist");
         
         String file = "";
         
