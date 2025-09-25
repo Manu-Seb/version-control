@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import core.Branch;
 import core.MerkleTreeBuilder;
 import core.Tree;
+import diff.Diff;
+import diff.DiffFactory;
 import utils.Helper;
 
 public class MainFunc {
@@ -179,6 +181,24 @@ public class MainFunc {
                 System.out.println(branch.substring(refs.length()).split("\\.")[0]);
             }
         }
+    }
+
+    //wokring vs staged
+    public void diff(){
+        Diff d = DiffFactory.getDiffObject("stage");
+        d.getDiff("", "");
+    }
+
+    //stage vs commit
+    public void diff(String commit1){
+        Diff d = DiffFactory.getDiffObject("commit");
+        d.getDiff(commit1,"");
+    }
+
+    //commit vs commit
+    public void diff(String commit1, String commit2){
+        Diff d = DiffFactory.getDiffObject("commit");
+        d.getDiff(commit1, "");
     }
 
 
