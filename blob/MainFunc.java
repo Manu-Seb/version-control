@@ -61,7 +61,18 @@ public class MainFunc {
             System.out.println("Please initialize the vcs");
             return;
         }
-        ArrayList paths = Helper.getFiles(dirPath);
+
+        File stage = new File(System.getProperty("user.dir") + "/.vcs/objects/stage.txt");
+        if (!stage.exists()) {
+            try{
+                stage.createNewFile();
+            }catch (IOException e) {
+                System.out.println("Error creating branch.txt: " + e.getMessage());
+            }
+        }
+
+
+        ArrayList<String> paths = Helper.getFiles(dirPath);
         Tree rep = new Tree(paths, cwd);
         Tree.Node root = rep.getRoot();
         MerkleTreeBuilder m = new MerkleTreeBuilder();
@@ -77,11 +88,18 @@ public class MainFunc {
     }   
 
     public void commit(String message, String author) {
-        File stage = new File(System.getProperty("user.dir") + "/.vcs/objects/stage.txt");
+
+        String cwd = System.getProperty("user.dir");
+
+        String stageDIR = cwd+ "/.vcs/objects/stage.txt";
+
+        File stage = new File(stageDIR);
         if (!stage.exists()) {
             System.out.println("No changes staged. Run addFiles() first.");
             return;
         }
+
+        String lastTreeHash = Helper.readFile(stageDIR);
 
         String branchName = Branch.getBranch();
 
@@ -89,7 +107,7 @@ public class MainFunc {
         System.out.println("Committed: " + commitHash);
 
         // Clear staged state (optional, like Git index)
-        lastTreeHash = null;
+        // lastTreeHash = null;
     }
 
     public void status(){
