@@ -180,6 +180,24 @@ public class Helper {
         return ""; // ignore if it doesn't match the base
     }
 
+    public static void writeFile(String DIR, String content) {
+        try {
+            File objFile = new File(DIR);
+
+            // Always overwrite (FileWriter without "append" flag does this by default)
+            try (FileWriter writer = new FileWriter(objFile)) {
+                writer.write(content);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing object: " + DIR, e);
+        }
+    }
+
+
+
+
+
     
 
 }

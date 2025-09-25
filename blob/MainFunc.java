@@ -3,7 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Map;
 
+import checkout.CheckoutFunc;
 import core.Branch;
 import core.MerkleTreeBuilder;
 import core.Tree;
@@ -124,7 +126,7 @@ public class MainFunc {
         ArrayList<String> files = Helper.getFiles(cwd);
 
         String branch = Branch.getBranch();
-        System.out.println("Current branch is "+ branch);
+        System.out.println("On branch: "+ branch);
 
         ArrayList<String> filesNotAdded = new ArrayList<>();
         ArrayList<String> filesAdded = new ArrayList<>();
@@ -226,6 +228,12 @@ public class MainFunc {
     public void diff(String commit1, String commit2){
         Diff d = DiffFactory.getDiffObject("commit");
         d.getDiff(commit1, commit2);
+    }
+
+
+    public void checkout(String commit){
+        CheckoutFunc cf = new CheckoutFunc();
+        cf.checking(commit);
     }
 
 
