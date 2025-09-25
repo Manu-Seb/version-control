@@ -101,6 +101,13 @@ public class MainFunc {
 
         String lastTreeHash = Helper.readFile(stageDIR);
 
+        System.out.println(lastTreeHash);
+
+        if(lastTreeHash== null || lastTreeHash.trim().isEmpty()){
+            System.out.println("No changes staged. Run addFiles() first.");
+            return ;
+        }
+
         String branchName = Branch.getBranch();
 
         String commitHash = Helper.createCommit(lastTreeHash, message, author,branchName);
@@ -108,6 +115,8 @@ public class MainFunc {
 
         // Clear staged state (optional, like Git index)
         // lastTreeHash = null;
+
+        Helper.stageFiles("");
     }
 
     public void status(){
