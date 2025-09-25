@@ -10,7 +10,6 @@ import utils.Helper;
 public class MerkleTreeBuilder {
 
     public static final String OBJECTS_DIR = ".vcs/objects/";
-    static  private int count = 0; 
 
     public static String buildMerkle(Tree.Node node) {
         // Ensure .vcs/objects exists
@@ -26,7 +25,7 @@ public class MerkleTreeBuilder {
             String content = Helper.readFile(cwd  + node.getFullPath()); 
             String hash = HashBuilder.blobHash(content);
 
-            node.setHash(hash);
+            node.setHash("ob"+hash);
 
             // Blob object contains filename + content
             String blobContent =  node.getName() + "\n" + content;
@@ -58,7 +57,7 @@ public class MerkleTreeBuilder {
             }
 
             String dirHash = HashBuilder.treeHash(combined.toString());
-            node.setHash(dirHash);
+            node.setHash("tr"+dirHash);
 
             // Tree object contains children listing
             writeObject("tr" + dirHash, treeContent.toString());
@@ -74,7 +73,6 @@ public class MerkleTreeBuilder {
             if (!objFile.exists()) { // avoid duplicates
                 try (FileWriter writer = new FileWriter(objFile)) {
                     writer.write(content);
-                    count++;
                 }
             }
         } catch (IOException e) {
@@ -82,7 +80,5 @@ public class MerkleTreeBuilder {
         }
     }
 
-    public static int getCount(){
-        return count;
-    }
+
 }

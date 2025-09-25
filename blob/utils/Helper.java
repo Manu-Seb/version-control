@@ -167,7 +167,7 @@ public class Helper {
         try {
             File objFile = new File(MerkleTreeBuilder.OBJECTS_DIR + "stage.txt");
             try (FileWriter writer = new FileWriter(objFile, false)) { // overwrite mode
-                writer.write(content + "\n" + MerkleTreeBuilder.getCount());
+                writer.write(content + "\n" );
             }
         } catch (IOException e) {
             throw new RuntimeException("Error writing stage.txt", e);
