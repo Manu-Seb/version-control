@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import core.Branch;
 import core.MerkleTreeBuilder;
 import core.Tree;
+import diff.Diff;
+import diff.DiffFactory;
 import utils.Helper;
 
 public class MainFunc {
@@ -60,7 +62,18 @@ public class MainFunc {
             System.out.println("Please initialize the vcs");
             return;
         }
-        ArrayList paths = Helper.getFiles(dirPath);
+
+        File stage = new File(System.getProperty("user.dir") + "/.vcs/objects/stage.txt");
+        if (!stage.exists()) {
+            try{
+                stage.createNewFile();
+            }catch (IOException e) {
+                System.out.println("Error creating branch.txt: " + e.getMessage());
+            }
+        }
+
+
+        ArrayList<String> paths = Helper.getFiles(dirPath);
         Tree rep = new Tree(paths, cwd);
         Tree.Node root = rep.getRoot();
         MerkleTreeBuilder m = new MerkleTreeBuilder();
@@ -76,10 +89,24 @@ public class MainFunc {
     }   
 
     public void commit(String message, String author) {
-        File stage = new File(System.getProperty("user.dir") + "/.vcs/objects/stage.txt");
+
+        String cwd = System.getProperty("user.dir");
+
+        String stageDIR = cwd+ "/.vcs/objects/stage.txt";
+
+        File stage = new File(stageDIR);
         if (!stage.exists()) {
             System.out.println("No changes staged. Run addFiles() first.");
             return;
+        }
+
+        String lastTreeHash = Helper.readFile(stageDIR);
+
+        System.out.println(lastTreeHash);
+
+        if(lastTreeHash== null || lastTreeHash.trim().isEmpty()){
+            System.out.println("No changes staged. Run addFiles() first.");
+            return ;
         }
 
         String branchName = Branch.getBranch();
@@ -88,7 +115,9 @@ public class MainFunc {
         System.out.println("Committed: " + commitHash);
 
         // Clear staged state (optional, like Git index)
-        lastTreeHash = null;
+        // lastTreeHash = null;
+
+        Helper.stageFiles("");
     }
 
     public void status(){
@@ -180,6 +209,24 @@ public class MainFunc {
                 System.out.println(branch.substring(refs.length()).split("\\.")[0]);
             }
         }
+    }
+
+    //wokring vs staged
+    public void diff(){
+        Diff d = DiffFactory.getDiffObject("working");
+        d.getDiff("", "");
+    }
+
+    //stage vs commit
+    public void diff(String commit1){
+        Diff d = DiffFactory.getDiffObject("stage");
+        d.getDiff(commit1,"");
+    }
+
+    //commit vs commit
+    public void diff(String commit1, String commit2){
+        Diff d = DiffFactory.getDiffObject("commit");
+        d.getDiff(commit1, "");
     }
 
 

@@ -1,3 +1,4 @@
+Main.java
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +18,7 @@ public class Main {
         MainFunc mf = new MainFunc();
 
         // mf.init();
-        // mf.addFiles(dir);
+        mf.addFiles(dir);
 
         // mf.commit("This is a test commit 849384", "manu");
 
@@ -31,7 +32,7 @@ public class Main {
 
         // mf.switchBranch("newBranch");
 
-        mf.diff("cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
+        // mf.diff("cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
 
         // mf.diff();
 

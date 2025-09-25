@@ -1,3 +1,4 @@
+WorkingDiff.java
 package diff;
 
 import java.util.ArrayList;
@@ -20,13 +21,6 @@ public class WorkingDiff extends Diff{
 
         // Read staged root tree hash from stage.txt
         String stageContent = Helper.readFile(objectsPath + "stage.txt");
-
-        if(stageContent== null || stageContent.trim().isEmpty()){
-            System.out.println("No changes staged. Run addFiles() first.");
-            return;
-        }
-
-
         String stagedRootHash = "tr" + stageContent.trim().split("\n")[0];
 
         // Build staged snapshot mapz

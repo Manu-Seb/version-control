@@ -1,3 +1,4 @@
+StageDiff.java
 package diff;
 
 import java.util.ArrayList;
@@ -8,41 +9,42 @@ import java.util.Map;
 import utils.HashBuilder;
 import utils.Helper;
 
-public class WorkingDiff extends Diff{
-    
+public class StageDiff extends Diff{
     public void getDiff(String commit1, String commit2) {
     // ignore commit1 and commit2 parameters for stage vs working diff
 
-        System.out.println("Diff between working and the staged changes: \n");
+        System.out.println("Diff between the staged files and the given commit");
+        if(commit1 == null  || commit1 == " "){
+            System.out.println("Please provide a commit hash");
+            return;
+        }
 
         String cwd = System.getProperty("user.dir");
         String objectsPath = cwd + "/.vcs/objects/";
 
         // Read staged root tree hash from stage.txt
         String stageContent = Helper.readFile(objectsPath + "stage.txt");
-
         if(stageContent== null || stageContent.trim().isEmpty()){
             System.out.println("No changes staged. Run addFiles() first.");
             return;
         }
-
-
         String stagedRootHash = "tr" + stageContent.trim().split("\n")[0];
 
         // Build staged snapshot mapz
         Map<String, String> stagedFiles = buildFileMap(stagedRootHash, objectsPath);
 
-        // Get working files list (relative paths!)
-        List<String> workingFiles = Helper.getFiles(cwd); // assume relative paths returned
+        String rootHash = Helper.readFile(objectsPath + commit1).split("\n")[0].split(" ")[1];
 
-        // Calculate working hashes
-        Map<String, String> workingFileHashes = new HashMap<>();
-        for (String file : workingFiles) {
-            String content = Helper.readFile(file);
-
-            //strip everything till the starting thing 
-            workingFileHashes.put(Helper.stripBase(file, cwd+"/"), "ob"+HashBuilder.blobHash(content));
+        if(rootHash == null || rootHash == " "){
+            System.out.println("Please provide a commit hash");
         }
+
+
+        //adding tree prefix
+        rootHash= "tr"+rootHash;
+        // Build working snapshot mapz
+        Map<String, String> workingFileHashes = buildFileMap(rootHash, objectsPath);
+        
 
         // printFileHashMap(workingFileHashes);
 
@@ -84,4 +86,6 @@ public class WorkingDiff extends Diff{
             }
         }
     }
+
+
 }

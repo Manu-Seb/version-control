@@ -11,7 +11,7 @@ public class MerkleTreeBuilder {
 
     public static final String OBJECTS_DIR = ".vcs/objects/";
 
-    public static String buildMerkle(Tree.Node node) {
+    public  String buildMerkle(Tree.Node node) {
         // Ensure .vcs/objects exists
         File objDir = new File(OBJECTS_DIR);
         if (!objDir.exists()) {

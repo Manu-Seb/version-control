@@ -20,7 +20,7 @@ public class Main {
         // mf.init();
         mf.addFiles(dir);
 
-        // mf.commit("This is a test commit 110", "manu");
+        // mf.commit("This is a test commit 849384", "manu");
 
         // mf.status();
 
@@ -31,6 +31,10 @@ public class Main {
         // mf.createBranch("newBranch");
 
         // mf.switchBranch("newBranch");
+
+        // mf.diff("cmf7c9be745ff2b129a8fce2c30975af2b0db4a0e9f99484a4e9edd0b0ab30cc50");
+
+        // mf.diff();
 
 
     }

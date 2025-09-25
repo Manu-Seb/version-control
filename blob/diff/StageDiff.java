@@ -9,7 +9,82 @@ import utils.HashBuilder;
 import utils.Helper;
 
 public class StageDiff extends Diff{
-    public void getDiff(String commit1, String commit2){}
+    public void getDiff(String commit1, String commit2) {
+    // ignore commit1 and commit2 parameters for stage vs working diff
+
+        System.out.println("Diff between the staged files and the given commit");
+        if(commit1 == null  || commit1 == " "){
+            System.out.println("Please provide a commit hash");
+            return;
+        }
+
+        String cwd = System.getProperty("user.dir");
+        String objectsPath = cwd + "/.vcs/objects/";
+
+        // Read staged root tree hash from stage.txt
+        String stageContent = Helper.readFile(objectsPath + "stage.txt");
+        if(stageContent== null || stageContent.trim().isEmpty()){
+            System.out.println("No changes staged. Run addFiles() first.");
+            return;
+        }
+        String stagedRootHash = "tr" + stageContent.trim().split("\n")[0];
+
+        // Build staged snapshot mapz
+        Map<String, String> stagedFiles = buildFileMap(stagedRootHash, objectsPath);
+
+        String rootHash = Helper.readFile(objectsPath + commit1).split("\n")[0].split(" ")[1];
+
+        if(rootHash == null || rootHash == " "){
+            System.out.println("Please provide a commit hash");
+        }
+
+
+        //adding tree prefix
+        rootHash= "tr"+rootHash;
+        // Build working snapshot mapz
+        Map<String, String> workingFileHashes = buildFileMap(rootHash, objectsPath);
+        
+
+        // printFileHashMap(workingFileHashes);
+
+        // System.out.println("=====================================================================================");
+
+        // printFileHashMap(stagedFiles);
+
+
+        //Arraylist to temporarily hold onto modified vs added files
+        ArrayList<String> modified = new ArrayList<String>();
+        ArrayList<String> added = new ArrayList<String>();
+
+        // Compare staged vs working: identify added, modified, unchanged 
+        for (String file : workingFileHashes.keySet()) {
+            if (!stagedFiles.containsKey(file)) {
+                added.add("A " + file); // new in working
+            } else if (!stagedFiles.get(file).equals(workingFileHashes.get(file))) {
+                modified.add("M " + file); // changed
+            } 
+        }
+
+        System.out.println("Added Files : ");
+        for(String file : added){
+            System.out.println(file);
+        }
+        System.out.println();
+
+        System.out.println("Modified Files : ");
+        for(String file : modified){
+            System.out.println(file);
+        }
+        System.out.println();
+
+        // Detect deleted files (in stage but missing in working)
+        System.out.println("Deleted Files : ");
+        for (String file : stagedFiles.keySet()) {
+            if (!workingFileHashes.containsKey(file)) {
+                System.out.println("D " +file);
+            }
+        }
+    }
 
 
 }

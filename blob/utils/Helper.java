@@ -121,7 +121,7 @@ public class Helper {
     
     public static String readFile(String fileName){
         File myFile = new File(fileName);
-        if(!myFile.exists()) System.out.println("File does not exist");
+        if(!myFile.exists()) System.out.println("File does not exist"+ fileName);
         
         String file = "";
         
@@ -166,7 +166,7 @@ public class Helper {
         try {
             File objFile = new File(MerkleTreeBuilder.OBJECTS_DIR + "stage.txt");
             try (FileWriter writer = new FileWriter(objFile, false)) { // overwrite mode
-                writer.write(content + "\n" );
+                writer.write(content  );
             }
         } catch (IOException e) {
             throw new RuntimeException("Error writing stage.txt", e);
