@@ -121,8 +121,7 @@ public class Helper {
     
     public static String readFile(String fileName){
         File myFile = new File(fileName);
-        if(myFile.exists()) System.out.println("File exists: " + fileName);
-        else System.out.println("File does not exist");
+        if(!myFile.exists()) System.out.println("File does not exist");
         
         String file = "";
         
@@ -172,6 +171,13 @@ public class Helper {
         } catch (IOException e) {
             throw new RuntimeException("Error writing stage.txt", e);
         }
+    }
+
+    public static String stripBase(String path, String base) {
+        if (path.startsWith(base)) {
+            return path.substring(base.length());
+        }
+        return ""; // ignore if it doesn't match the base
     }
 
     
