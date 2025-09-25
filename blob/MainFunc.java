@@ -185,13 +185,13 @@ public class MainFunc {
 
     //wokring vs staged
     public void diff(){
-        Diff d = DiffFactory.getDiffObject("stage");
+        Diff d = DiffFactory.getDiffObject("working");
         d.getDiff("", "");
     }
 
     //stage vs commit
     public void diff(String commit1){
-        Diff d = DiffFactory.getDiffObject("commit");
+        Diff d = DiffFactory.getDiffObject("stage");
         d.getDiff(commit1,"");
     }
 
