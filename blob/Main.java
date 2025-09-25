@@ -19,7 +19,7 @@ public class Main {
         // mf.init();
         // mf.addFiles(dir);
 
-        // mf.commit("This is a test commit 849384", "manu");
+        // mf.commit("This is a test commit ffksdjfls", "manu");
 
         // mf.status();
 
@@ -31,9 +31,11 @@ public class Main {
 
         // mf.switchBranch("newBranch");
 
-        mf.diff("cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
+        // mf.diff("cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
 
         // mf.diff();
+
+        mf.diff("cme42cef3d4825ca18afc19c64915bfffff3019f1c0ea9d3e9d9096bc2103972fa","cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
 
 
     }

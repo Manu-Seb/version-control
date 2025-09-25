@@ -225,7 +225,7 @@ public class MainFunc {
     //commit vs commit
     public void diff(String commit1, String commit2){
         Diff d = DiffFactory.getDiffObject("commit");
-        d.getDiff(commit1, "");
+        d.getDiff(commit1, commit2);
     }
 
 

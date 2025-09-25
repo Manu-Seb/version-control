@@ -1,3 +1,4 @@
+CommitDiff.java
 package diff;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class CommitDiff extends Diff{
     public void getDiff(String commit1, String commit2) {
     // ignore commit1 and commit2 parameters for stage vs working diff
 
-        System.out.println("Diff between" + commit1 + " and " + commit2);
+        System.out.println("Diff between the staged files and the given commit");
         if(commit1 == null  || commit1.trim().isEmpty() || commit2 == null || commit2.trim().isEmpty()){
             System.out.println("Please provide a commit hash");
             return;
