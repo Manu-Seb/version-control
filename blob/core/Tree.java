@@ -2,6 +2,8 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Helper;
+
 public class Tree {
     private Node root;
     private String base; // the part we want to ignore
@@ -11,7 +13,7 @@ public class Tree {
         root = new Node("/");
         this.base = base.endsWith("/") ? base : base + "/"; // ensure trailing slash
         for (String dir : dirNames) {
-            String relative = stripBase(dir);
+            String relative = Helper.stripBase(dir,base);
             if (!relative.isEmpty()) {
                 String[] parts = relative.split("/");
                 addPath(parts, root);
@@ -20,12 +22,7 @@ public class Tree {
     }
 
     // Strip base from a path
-    private String stripBase(String path) {
-        if (path.startsWith(base)) {
-            return path.substring(base.length());
-        }
-        return ""; // ignore if it doesn't match the base
-    }
+    
 
     // Add one path into the tree
     private void addPath(String[] parts, Node parent) {

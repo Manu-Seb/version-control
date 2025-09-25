@@ -25,11 +25,13 @@ public class Main {
 
         // mf.log();
 
-        mf.listBranches();
+        // mf.listBranches();
 
-        mf.createBranch("newBranch");
+        // mf.createBranch("newBranch");
 
-        mf.switchBranch("newBranch");
+        // mf.switchBranch("newBranch");
+
+        mf.diff();
 
 
     }
