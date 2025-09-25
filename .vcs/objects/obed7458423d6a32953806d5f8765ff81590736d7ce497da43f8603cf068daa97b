@@ -20,11 +20,18 @@ public class Main {
         // mf.init();
         mf.addFiles(dir);
 
-        // mf.commit("This is a test commit 7", "manu");
+        // mf.commit("This is a test commit 110", "manu");
 
         // mf.status();
 
         // mf.log();
+
+        // mf.listBranches();
+
+        // mf.createBranch("newBranch");
+
+        // mf.switchBranch("newBranch");
+
 
     }
 }

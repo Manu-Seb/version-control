@@ -1,4 +1,5 @@
-Helper.java
+package utils;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import core.Branch;
+import core.MerkleTreeBuilder;
 public class Helper {
 
     private static final String DIR = ".vcs/";
@@ -82,8 +86,9 @@ public class Helper {
     }
 
     private static String getHead() {
+        String branch = Branch.getBranch();
         try {
-            File file = new File(DIR+"refs.txt");
+            File file = new File(DIR+"refs/"+branch +".txt");
             if (!file.exists()) return null;
             return Files.readString(file.toPath()).trim();
         } catch (IOException e) {
@@ -116,7 +121,8 @@ public class Helper {
     
     public static String readFile(String fileName){
         File myFile = new File(fileName);
-        System.out.println("File exists: " + fileName);
+        if(myFile.exists()) System.out.println("File exists: " + fileName);
+        else System.out.println("File does not exist");
         
         String file = "";
         

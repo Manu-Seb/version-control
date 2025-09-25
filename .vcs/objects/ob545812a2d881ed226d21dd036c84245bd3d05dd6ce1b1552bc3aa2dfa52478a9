@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.util.ArrayList;
 
+import core.Branch;
+import core.MerkleTreeBuilder;
+import core.Tree;
+import utils.Helper;
+
 public class MainFunc {
 
     private String lastTreeHash;
@@ -71,7 +76,8 @@ public class MainFunc {
     }   
 
     public void commit(String message, String author) {
-        if (lastTreeHash == null) {
+        File stage = new File(System.getProperty("user.dir") + "/.vcs/objects/stage.txt");
+        if (!stage.exists()) {
             System.out.println("No changes staged. Run addFiles() first.");
             return;
         }
@@ -143,6 +149,37 @@ public class MainFunc {
             System.out.println("==================================================================================");
             currCommit= commitLines[1].split(" ")[1];
         }while(!commitLines[1].split(" ")[1].equals("NoParentFound"));
+    }
+
+    public void createBranch(String s){
+        ArrayList<String> branches = Helper.getFiles(System.getProperty("user.dir") + "/.vcs/refs/");
+        for(String branchPath : branches){
+            String[] path = branchPath.split("/");
+            String branchName = path[path.length-1].split("\\.")[0];
+            if(branchName.equals(s)){
+                System.out.println("Branch already exists");
+                return;
+            }
+        }
+        Branch.createBranch(s);
+        System.out.println("New branch created:"+ s);
+    }
+
+    public void switchBranch(String s){
+        Branch.setBranch(s);
+    }
+
+    public void listBranches(){
+
+        System.out.println("Available branches are: ");
+        ArrayList<String> branches = Branch.getBranches();
+        String cwd = System.getProperty("user.dir");
+        String refs = cwd+"/.vcs/refs/";
+        for(String branch : branches){
+            if(branch.startsWith(cwd)){
+                System.out.println(branch.substring(refs.length()).split("\\.")[0]);
+            }
+        }
     }
 
 

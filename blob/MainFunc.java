@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.util.ArrayList;
 
+import core.Branch;
+import core.MerkleTreeBuilder;
+import core.Tree;
+import utils.Helper;
+
 public class MainFunc {
 
     private String lastTreeHash;

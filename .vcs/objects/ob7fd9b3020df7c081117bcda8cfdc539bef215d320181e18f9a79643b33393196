@@ -1,10 +1,16 @@
+MerkleTreeBuilder.java
+package core;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import core.Tree.Node;
+import utils.HashBuilder;
+import utils.Helper;
+
 public class MerkleTreeBuilder {
 
-    static final String OBJECTS_DIR = ".vcs/objects/";
+    public static final String OBJECTS_DIR = ".vcs/objects/";
     static  private int count = 0; 
 
     public static String buildMerkle(Tree.Node node) {
