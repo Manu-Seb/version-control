@@ -35,8 +35,9 @@ public class Main {
 
         // mf.diff();
 
-        mf.diff("cme42cef3d4825ca18afc19c64915bfffff3019f1c0ea9d3e9d9096bc2103972fa","cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
-
+        // mf.diff("cme42cef3d4825ca18afc19c64915bfffff3019f1c0ea9d3e9d9096bc2103972fa","cmd1bdcc648c615575161fd16a2e5856be68e036433636c18af5d04a318befc0e7");
+        
+        mf.checkout("cm43cf9af02da21647a3355fe7dc6f4ad39f57740c1ee4aff1d63c008367c41454");
 
     }
 }
